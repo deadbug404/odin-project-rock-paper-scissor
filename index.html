@@ -1,0 +1,71 @@
+<script>
+let playerScore = 0;
+let computerScore = 0;
+
+function getComputerChoice(){
+    let choice = ["Rock","Paper","Scissor"];
+    let choicePicked = choice[Math.floor(Math.random()*choice.length)];
+    choicePicked = choicePicked.toUpperCase();
+    return choicePicked;
+}
+
+function getPlayerChoice(){
+    let choice = prompt("Enter your choice: Rock,Paper or Scissor: ");
+    choice = choice.toUpperCase();
+    if(choice === "ROCK" || choice === "PAPER" || choice === "SCISSOR"){
+        return choice;
+    }else{   
+        alert("Wrong choice! Refresh the page and try again");
+    }
+}
+
+function playRound(player, computer){
+    if(player === "ROCK"){
+        if(computer === "SCISSOR"){
+            playerScore++;
+            return "You win! Rock beats scissor";
+        }else if(computer === "PAPER"){
+            computerScore++;
+            return "You lose! Paper beats Rock";
+        }else{
+            return "Tie! both players picked Rock";
+        }
+    }else if(player === "PAPER"){
+        if(computer === "ROCK"){
+            playerScore++;
+            return "You win! Paper beats Rock";
+        }else if(computer === "SCISSOR"){
+            computerScore++;
+            return "You lose! Scissor beats Paper";
+        }else{
+            return "Tie! both players picked Paper";
+        }
+    }else{
+        if(computer === "ROCK"){
+            computerScore++;
+            return "You lose! Rock beats Scissor";
+        }else if(computer === "PAPER"){
+            playerScore++;
+            return "You win! Scissor beats Paper";
+        }else{
+            return "Tie! both players picked Scissor";
+        }
+    }
+}
+
+function game(){
+    for(let i = 1; i <= 5; i++){
+        let result = playRound(getPlayerChoice(),getComputerChoice());
+        console.log(`Game ${i}`);
+        console.log(result);
+    }
+    if(playerScore>computerScore){
+        console.log(`You won the game! Your score: ${playerScore} | Computer score: ${computerScore}`);
+    }else{
+        console.log(`You lost the game! Your score: ${playerScore} | Computer score: ${computerScore}`);
+    }
+}
+
+game();
+
+</script>
