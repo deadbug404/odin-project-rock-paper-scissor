@@ -1,0 +1,62 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('images/background.gif');
+    background-size: cover;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: rgba(128, 255, 159, 0.8);
+}
+
+.container #result{
+    text-align: center;
+}
+
+.container .buttons{
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+.container .buttons button{
+    height: 15vw;
+    width: 15vw;
+    border: none;
+}
+
+.container .buttons #rock{
+    background: url('images/rock.jpg');
+    background-size: contain;
+}
+
+.container .buttons #paper{
+    background: url('images/paper.jpg');
+    background-size: contain;
+}
+
+.container .buttons #scissor{
+    background: url('images/scissor.jpg');
+    background-size: contain;
+}
+
+.container .score{
+    display: flex;
+    flex-direction: column;
+}
+
+.container .score .points{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container #winner{
+    text-align: center;
+}

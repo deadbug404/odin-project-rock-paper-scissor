@@ -1,71 +1,41 @@
-<script>
-let playerScore = 0;
-let computerScore = 0;
-
-function getComputerChoice(){
-    let choice = ["Rock","Paper","Scissor"];
-    let choicePicked = choice[Math.floor(Math.random()*choice.length)];
-    choicePicked = choicePicked.toUpperCase();
-    return choicePicked;
-}
-
-function getPlayerChoice(){
-    let choice = prompt("Enter your choice: Rock,Paper or Scissor: ");
-    choice = choice.toUpperCase();
-    if(choice === "ROCK" || choice === "PAPER" || choice === "SCISSOR"){
-        return choice;
-    }else{   
-        alert("Wrong choice! Refresh the page and try again");
-    }
-}
-
-function playRound(player, computer){
-    if(player === "ROCK"){
-        if(computer === "SCISSOR"){
-            playerScore++;
-            return "You win! Rock beats scissor";
-        }else if(computer === "PAPER"){
-            computerScore++;
-            return "You lose! Paper beats Rock";
-        }else{
-            return "Tie! both players picked Rock";
-        }
-    }else if(player === "PAPER"){
-        if(computer === "ROCK"){
-            playerScore++;
-            return "You win! Paper beats Rock";
-        }else if(computer === "SCISSOR"){
-            computerScore++;
-            return "You lose! Scissor beats Paper";
-        }else{
-            return "Tie! both players picked Paper";
-        }
-    }else{
-        if(computer === "ROCK"){
-            computerScore++;
-            return "You lose! Rock beats Scissor";
-        }else if(computer === "PAPER"){
-            playerScore++;
-            return "You win! Scissor beats Paper";
-        }else{
-            return "Tie! both players picked Scissor";
-        }
-    }
-}
-
-function game(){
-    for(let i = 1; i <= 5; i++){
-        let result = playRound(getPlayerChoice(),getComputerChoice());
-        console.log(`Game ${i}`);
-        console.log(result);
-    }
-    if(playerScore>computerScore){
-        console.log(`You won the game! Your score: ${playerScore} | Computer score: ${computerScore}`);
-    }else{
-        console.log(`You lost the game! Your score: ${playerScore} | Computer score: ${computerScore}`);
-    }
-}
-
-game();
-
-</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">   
+                <button onclick="game()" id="rock"></button>
+                <button onclick="game()" id="paper"></button>
+                <button onclick="game()" id="scissor"></button>
+        </div>
+        <div  class="score">
+            <center>
+                <h4>Points</h4>
+            </center>
+            <div class="points">
+                <div id="cpoint">
+                    <p>Computer: 0</p>
+                </div>
+                <div id="ppoint">
+                    <p>Player: 0</p>
+                </div>
+            </div>
+        </div>
+        <div id="result">
+            <p>Pick a choice!</p>         
+        </div>
+        <div id="winner">
+            <h4>Winner:</h4>
+            <p>Match Ongoing!</p>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
