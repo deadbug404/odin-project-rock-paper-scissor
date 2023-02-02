@@ -1,7 +1,16 @@
 let playerScore = 0;
 let computerScore = 0;
-let playerChoice = "";
+let playerChoice;
 let gameInstance = 1;
+
+let buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', function (e){
+        playerChoice = this.id.toUpperCase();
+        game();
+    })
+});
+
 
 function getComputerChoice(){
     let choice = ["Rock","Paper","Scissor"];
@@ -9,14 +18,6 @@ function getComputerChoice(){
     choicePicked = choicePicked.toUpperCase();
     return choicePicked;
 }
-
-
-let buttons = document.querySelectorAll('button');
-buttons.forEach((button) => {
-    button.addEventListener('click', function (e){
-        playerChoice = e.target.id.toUpperCase();
-    })
-});
 
 function playRound(player, computer){
     if(player === "ROCK"){
@@ -55,6 +56,7 @@ function playRound(player, computer){
 function game(){
     if(gameInstance == 1){
         let result = playRound(playerChoice,getComputerChoice());
+        console.log(playerChoice);
 
         //updates text result
         let p = document.createElement('p');
