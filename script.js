@@ -1,103 +1,86 @@
-let playerScore = 0;
-let computerScore = 0;
-let playerChoice;
-let gameInstance = 1;
-
-let buttons = document.querySelectorAll('button');
-buttons.forEach((button) => {
-    button.addEventListener('click', function (e){
-        playerChoice = this.id.toUpperCase();
-        game();
-    })
-});
-
-
 function getComputerChoice(){
-    let choice = ["Rock","Paper","Scissor"];
-    let choicePicked = choice[Math.floor(Math.random()*choice.length)];
-    choicePicked = choicePicked.toUpperCase();
-    return choicePicked;
+    let choice = ['rock','paper','scissor'];
+
+    let random = Math.floor(Math.random() * choice.length);
+    return choice[random];
 }
 
-function playRound(player, computer){
-    if(player === "ROCK"){
-        if(computer === "SCISSOR"){
-            playerScore++;
-            return "You win! Rock beats scissor";
-        }else if(computer === "PAPER"){
-            computerScore++;
-            return "You lose! Paper beats Rock";
-        }else{
-            return "Tie! both players picked Rock";
-        }
-    }else if(player === "PAPER"){
-        if(computer === "ROCK"){
-            playerScore++;
-            return "You win! Paper beats Rock";
-        }else if(computer === "SCISSOR"){
-            computerScore++;
-            return "You lose! Scissor beats Paper";
-        }else{
-            return "Tie! both players picked Paper";
-        }
+function getPlayerChoice(){
+    let playerChoice = prompt('Pick your choice: Rock Paper Scissor');
+    return playerChoice.toLowerCase();
+}
+
+function playRound(playerSelection, computerSelection){
+    switch(playerSelection){
+        case 'rock':
+            return (computerSelection == 'paper') ?  'You lose! paper beats rock' :
+                   (computerSelection == 'scissor') ?  'You win! rock beats scissor' :
+                    'Tie! Both picked rock';
+        case 'paper':
+            return (computerSelection == 'rock') ?  'You win! paper beats rock' :
+                   (computerSelection == 'scissor') ?  'You lose! scissor beats paper' :
+                    'Tie! Both picked paper';
+        case 'scissor':
+            return (computerSelection == 'rock') ?  'You lose! rock beats scissor' :
+                   (computerSelection == 'paper') ?  'You win! scissor beats paper' :
+                    'Tie! Both picked scissor';
+        default:
+            return 'You can only choose: Rock Paper Scissor';
+
+    }
+}
+
+function validateWinner(result){
+    if(result == 'win!'){
+        return 'player';
+    }else if(result == 'lose!'){
+        return 'computer';
+    }else if(result == 'can'){
+        return 'wrong';
     }else{
-        if(computer === "ROCK"){
-            computerScore++;
-            return "You lose! Rock beats Scissor";
-        }else if(computer === "PAPER"){
-            playerScore++;
-            return "You win! Scissor beats Paper";
-        }else{
-            return "Tie! both players picked Scissor";
-        }
+        return 'tie';
+    }
+}
+
+function checkWinner(playerScore,computerScore){
+    if(playerScore > computerScore ){
+        console.log('Congratulations! You beat the computer');
+    }else if(playerScore < computerScore){
+        console.log('What a shame! You lost to a computer');
+    }else{
+        console.log('I didn\'t know it\'s possible but its a tie!')
     }
 }
 
 function game(){
-    if(gameInstance == 1){
-        let result = playRound(playerChoice,getComputerChoice());
-        console.log(playerChoice);
+    let playerScore = 0;
+    let computerScore = 0;
+    for(let i=0;i<5;i++){
+        let result = '';
+        result = playRound(getPlayerChoice(),getComputerChoice());
+        console.log(result);
 
-        //updates text result
-        let p = document.createElement('p');
-        p.textContent = `Result: ${result}`;
-        let resultDiv = document.querySelector('#result');
-        let oldNode = document.getElementById('result').firstElementChild;
-        resultDiv.replaceChild(p, oldNode);
+        let myArray = result.split(" ");
+        let whoWin = validateWinner(myArray[1]);
 
-        //update computer points
-        let cpoints = document.createElement('p');
-        cpoints.textContent = `Computer: ${computerScore}`;
-        let cpointDiv = document.querySelector('#cpoint');
-        let cpointNode = document.getElementById('cpoint').firstElementChild;
-        cpointDiv.replaceChild(cpoints, cpointNode);
-
-        //update player points
-        let ppoints = document.createElement('p');
-        ppoints.textContent = `Player: ${playerScore}`;
-        let ppointDiv = document.querySelector('#ppoint');
-        let ppointNode = document.getElementById('ppoint').firstElementChild;
-        ppointDiv.replaceChild(ppoints, ppointNode);
-
-        if(computerScore == 5 || playerScore == 5){
-            let p = document.createElement('p');
-            if(computerScore == 5){
-                p.textContent = 'Sadly, the computer beats you :(';
-            }else{
-                p.textContent = 'You won!';
-            }
-            let winDiv = document.querySelector('#winner');
-            let winnerNode = document.getElementById('winner').lastElementChild;
-            winDiv.replaceChild(p,winnerNode)
-            gameInstance = 0;
-        }
-    }else{
-        if(confirm('The game is already finished. Do you want to play again?')){
-            location.reload();
+        if(whoWin == 'player'){
+            playerScore++;
+        }else if(whoWin == 'computer'){
+            computerScore ++;
+        }else if(whoWin == 'wrong'){
+            console.log("Wrong choice score will be given to computer");
+            computerScore++;
         }else{
+            playerScore++;
+            computerScore++;
         }
-        
-    }
-        
 
+        console.log(`Scores:
+        Player: ${playerScore}
+        Computer: ${computerScore}`);
+    }
+
+    checkWinner(playerScore,computerScore);
 }
+
+game();

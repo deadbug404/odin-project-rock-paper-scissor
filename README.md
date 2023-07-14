@@ -1,4 +1,7 @@
-# Odin-project-rock-paper-scissor 
+Odin Project: Rock Paper Scissor
+---------------------------------
 
-Rock, paper and scissor exercise from The Odin Project
+Classic Rock, Paper and Scissor game using javascript
+
+
 
