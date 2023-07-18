@@ -1,0 +1,72 @@
+html, body {
+    height:100% ;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container .left{
+    display: flex;
+    flex: 1;
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .right{
+    display: flex;
+    height: 100%;
+    flex: 1;
+    width: 50%;
+    gap: 100px;
+    align-items: center;
+}
+
+.container .right .playerChoices,
+.container .right .computerChoices{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container .right button{
+    height: 100px;
+    width: 100px;
+    border: none;
+    background-size: contain;
+}
+
+.container .right .playerChoices button:hover{
+    cursor: pointer;
+    border: 8px solid white;
+}
+
+.flipped{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+#chosen{
+    border: 8px solid white;
+}

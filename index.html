@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissor</title>
 </head>
 <body>
-    
+    <div class="header">
+        <h1>Rock Paper and Scissors Game (Classic)</h1>
+    </div>
+    <div class="container">
+        <div class="left">
+            <div class="score">
+                <h3>Score</h3>
+                <p class="computerScore">Computer: 0</p>
+                <p class="playerScore">Player: 0</p>
+                <p class="winner">Winner: </p>
+            </div>
+            <div class="results">
+                <h3>Stats: </h3>
+                <p>Total Games: </p>
+                <p>Total Wins: </p>
+                <p>Winrate: </p>
+            </div>
+        </div>
+        <div class="right">
+            <div class="playerChoices">
+                <h3>Player</h3>
+                <button style="background-image: url('images/rock.png');" id="rock"></button>
+                <button style="background-image: url('images/paper.png');" id="paper"></button>
+                <button style="background-image: url('images/scissor.png');" id="scissor"></button>
+            </div>
+            <div class="computerChoices">
+                <h3>Computer</h3>
+                <button style="background-image: url('images/rock.png');" id="cRock" class="flipped computer"></button>
+                <button style="background-image: url('images/paper.png');" id="cPaper" class="flipped computer"></button>
+                <button style="background-image: url('images/scissor.png');" id="cScissor" class="flipped computer"></button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
