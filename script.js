@@ -2,27 +2,86 @@ const playerButtons = document.querySelectorAll('.container .right .playerChoice
 const computerButtons = document.querySelectorAll('.container .right .computerChoices button');
 const miscButtons = document.querySelectorAll('.container .left .misc button');
 const startButton = document.querySelector('.container .left .misc #startButton');
-const gameArea = document.getElementById('right');
+const validateResultArea = document.getElementById('right');
 let playerScore = document.querySelector('.container .left .score .playerScore');
 let computerScore = document.querySelector('.container .left .score .computerScore');
 let roundStatus = document.querySelector('.container .right .status');
+let totalGames = document.querySelector('.container .left .results .total-games');
+let totalWins = document.querySelector('.container .left .results .total-wins');
+let winrate = document.querySelector('.container .left .results .winrate');
 
 playerButtons.forEach(element => {
     element.addEventListener('click', e => {
-        playerButtons.forEach(element1 => {
-            element1.classList.remove('chosen');
-        });
-        element.classList.toggle('chosen');
-
-        let playerChoice = e.target.id;
-        let computerChoice = getComputerChoice();
-
-        let result = game(playerChoice,computerChoice);
-        setStatus(result);
-        let resultArr = result.split(' ');
-        setPoints(resultArr[1]);
+        game(e,element);
     })
 });
+
+function game(eventListener,currElement){
+    playerButtons.forEach(element1 => {
+        element1.classList.remove('chosen');
+    });
+    currElement.classList.toggle('chosen');
+
+    let playerChoice = eventListener.target.id;
+    let computerChoice = getComputerChoice();
+
+    let result = validateResult(playerChoice,computerChoice);
+    setStatus(result);
+    let resultArr = result.split(' ');
+    setScores(resultArr[1]);
+    isGameOver();
+}
+
+function isGameOver(){
+    let player = playerScore.textContent.split(' ');
+    let computer = computerScore.textContent.split(' ');
+    if(player[1] == '5' || computer[1] == '5'){
+        setGameOver(player);
+    }
+}
+
+function setGameOver(player){
+    playerButtons.forEach(element1 => {
+        element1.classList.remove('chosen');
+    });
+    computerButtons.forEach(element => {
+        element.classList.remove('chosen');
+    });
+    playerScore.textContent = 'Player: 0';
+    computerScore.textContent = 'Computer: 0';
+    (player[1] == '5') ? roundStatus.textContent = 'You win! you beat the computer' :
+    roundStatus.textContent = 'You lose to a computer, how embarassing!';
+
+    let resultArr = roundStatus.textContent.split(' ');
+    let result = resultArr[1];
+    setStats(result);
+}
+
+function setStats(result){
+    let totalGamesArr = totalGames.textContent.split(' ');
+    let totalWinsArr = totalWins.textContent.split(' ');
+    let totalGamesArrValue = parseInt(totalGamesArr[2]);
+    let totalWinsArrValue = parseInt(totalWinsArr[2]);
+    let winrateValue = 0;
+
+    if(result == 'win!'){
+        totalGamesArrValue += 1;
+        totalWinsArrValue += 1;
+        console.log('win');
+        winrateValue = (totalWinsArrValue * 100) / totalGamesArrValue;
+        winrateValue = winrateValue.toFixed(0);
+    }else{
+        totalGamesArrValue += 1;
+        console.log('lose');
+        winrateValue = (totalWinsArrValue * 100) / totalGamesArrValue;
+        winrateValue = winrateValue.toFixed(0);
+    }
+    
+    totalGames.textContent = `Total Games: ${totalGamesArrValue}`;
+    totalWins.textContent = `Total Wins: ${totalWinsArrValue}`;
+    winrate.textContent = `Winrate: ${winrateValue}%`;
+}
+
 
 function getComputerChoice(){
     const myArr = ['rock','paper','scissor'];
@@ -40,7 +99,7 @@ function setComputerChoice(computerChoice){
     computerButtons[2].classList.toggle('chosen');
 }
 
-function setPoints(result){
+function setScores(result){
     let playerScoreArr = playerScore.textContent.split(' ');
     let computerScoreArr = computerScore.textContent.split(' ');
     let playerScoreArrValue = parseInt(playerScoreArr[1]);
@@ -58,7 +117,7 @@ function setStatus(currentStatus){
     roundStatus.textContent = `Status: ${currentStatus}`;
 }
 
-function game(playerChoice, computerChoice){
+function validateResult(playerChoice, computerChoice){
     switch(playerChoice){
         case 'rock':
             return (computerChoice == 'paper') ? `You lose! ${playerChoice} lose against ${computerChoice}` :
@@ -76,6 +135,6 @@ function game(playerChoice, computerChoice){
 }
 
 function startGame(){
-    gameArea.classList.toggle('hide');
+    validateResultArea.classList.toggle('hide');
     startButton.disabled = true;
 }
