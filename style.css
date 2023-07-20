@@ -27,7 +27,11 @@ html, body {
     gap: 20px;
     justify-content: center;
     align-items: center;
-    background-color:  #89CFF0;
+    background-color:  #FEE715FF;
+    box-shadow: 5px 2px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 2px 5px 0px rgba(0,0,0,0.75);
+    z-index: 999;
 }
 
 .container .left .misc{
@@ -55,6 +59,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: lightyellow;
 }
 
 .container .right .status{
@@ -90,7 +95,7 @@ html, body {
 
 .container .right .playerChoices button:hover{
     cursor: pointer;
-    border: 8px solid white;
+    border: 8px solid lightyellow;
 }
 
 .flipped{

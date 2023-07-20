@@ -82,6 +82,9 @@ function setStats(result){
     winrate.textContent = `Winrate: ${winrateValue}%`;
 }
 
+function resetStats(){
+    
+}
 
 function getComputerChoice(){
     const myArr = ['rock','paper','scissor'];
