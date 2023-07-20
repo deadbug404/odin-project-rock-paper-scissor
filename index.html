@@ -17,7 +17,6 @@
                 <h3>Score</h3>
                 <p class="computerScore">Computer: 0</p>
                 <p class="playerScore">Player: 0</p>
-                <p class="winner">Winner: </p>
             </div>
             <div class="results">
                 <h3>Stats: </h3>
@@ -25,19 +24,29 @@
                 <p>Total Wins: </p>
                 <p>Winrate: </p>
             </div>
-        </div>
-        <div class="right">
-            <div class="playerChoices">
-                <h3>Player</h3>
-                <button style="background-image: url('images/rock.png');" id="rock"></button>
-                <button style="background-image: url('images/paper.png');" id="paper"></button>
-                <button style="background-image: url('images/scissor.png');" id="scissor"></button>
+            <div class="misc">
+                <h3>Settings</h3>
+                <button onclick="startGame()" id="startButton">Start</button>
+                <button>Reset Stats</button>
             </div>
-            <div class="computerChoices">
-                <h3>Computer</h3>
-                <button style="background-image: url('images/rock.png');" id="cRock" class="flipped computer"></button>
-                <button style="background-image: url('images/paper.png');" id="cPaper" class="flipped computer"></button>
-                <button style="background-image: url('images/scissor.png');" id="cScissor" class="flipped computer"></button>
+        </div>
+        <div class="right hide" id="right">
+            <div class="choices">
+                <div class="playerChoices">
+                    <h3>Player</h3>
+                    <button style="background-image: url('images/rock.png');" id="rock"></button>
+                    <button style="background-image: url('images/paper.png');" id="paper"></button>
+                    <button style="background-image: url('images/scissor.png');" id="scissor"></button>
+                </div>
+                <div class="computerChoices">
+                    <h3>Computer</h3>
+                    <button style="background-image: url('images/rock.png');" id="cRock" class="flipped computer"></button>
+                    <button style="background-image: url('images/paper.png');" id="cPaper" class="flipped computer"></button>
+                    <button style="background-image: url('images/scissor.png');" id="cScissor" class="flipped computer"></button>
+                </div>
+            </div>
+            <div class="status" style="font-size: larger;">
+                <p>Status: Choose first</p>
             </div>
         </div>
     </div>
