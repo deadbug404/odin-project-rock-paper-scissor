@@ -83,7 +83,20 @@ function setStats(result){
 }
 
 function resetStats(){
-    
+    playerScore.textContent = 'Player: 0';
+    computerScore.textContent = 'Computer: 0';
+    totalWins.textContent = 'Total Wins: 0';
+    totalGames.textContent = 'Total Game: 0';
+    winrate.textContent = 'Winrate 0%';
+    roundStatus.textContent = 'Status: Choose first';
+
+    computerButtons.forEach(element => {
+        element.classList.remove('chosen');
+    });
+
+    playerButtons.forEach(element1 => {
+        element1.classList.remove('chosen');
+    });
 }
 
 function getComputerChoice(){
